@@ -58,5 +58,5 @@ jobs:
   Test-Phase:
     runs-on: ubuntu-latest
     steps:
-      -run: |
+      - run: |
         sleep 100
