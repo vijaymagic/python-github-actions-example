@@ -13,17 +13,15 @@ jobs:
   build:
 
     runs-on: [region]
-    strategy:
-        # in this example, there is a newer version already installed, 3.7.7, so the older version will be downloaded
-      python-version: [3.5, 3.6, 3.7.4, 3.8]
 
     steps:
     - uses: actions/checkout@v2
     - run: |
        git fetch --prune --unshallow
-    - uses: actions/setup-python@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.x'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -40,7 +38,6 @@ jobs:
         pip install pytest
         export PYTHONPATH=src
         pytest
-
   Deploy:
    needs: build
    runs-on: ubuntu-latest
